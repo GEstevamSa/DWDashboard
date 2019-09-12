@@ -1,14 +1,16 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DWDashboard</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>DWDashboard</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
+
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -17,30 +19,30 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-page="/Index" class="navbar-brand">DWDashboard</a>
+    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Cadastrar</button>
+    <div id="id01" class="modal">
+
+        <form class="modal-content animate" action="/Error">
+            <div class="container">
+                <label for="uname"><b>Usuario</b></label>
+                <input type="text" placeholder="Usuario..." name="uname" required>
+                <br />
+                <label for="psw"><b>Senha</b></label>
+                <input type="password" placeholder="Senha" name="psw" required>
+
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Lembre-me
+                </label>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-page="/About">About</a></li>
-                    <li><a asp-page="/Contact">Contact</a></li>
-                    <li><a asp-page="/TelaLogin">Tela de Login</a></li>
 
-                </ul>
+            <div class="container" style="background-color:white">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
+                <span class="cdspsw">Realize seu  <a asp-page="/Error">cadastro</a> ou Esqueceu sua <a asp-page="/Error">senha?</a></span>
             </div>
-        </div>
-    </nav>
-
-    <partial name="_CookieConsentPartial" />
-
+        </form>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -71,5 +73,15 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+    <script>
+        var modal = document.getElementById('id01');
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
